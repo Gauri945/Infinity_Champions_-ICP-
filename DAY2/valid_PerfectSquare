@@ -6,4 +6,22 @@ class Solution {
       }
       return false;
     }
+
+}
+
+//optimize
+class Solution {
+    public boolean isPerfectSquare(int num) {
+   
+      int i=0;
+      int j=num;
+      while(i<=j){
+        long mid=i+(j-i)/2;
+        long sq=mid*mid;
+        if(sq==num) return true;
+        else if(num>sq) i=(int)mid+1;
+        else j=(int)mid-1;
+      }
+      return false;
+    }
 }
