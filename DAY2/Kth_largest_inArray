@@ -1,0 +1,30 @@
+//bRUTE FORCE APPROACH   
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        //using simple approach o(nlogn)
+        int n = nums.length;
+        Arrays.sort(nums);
+        return nums[n-k];
+
+    }
+}
+
+//optimizee  --> Time Complexity O(nlogK)
+class Solution {
+    public int findKthLargest(int[] arr, int k) {
+        
+        PriorityQueue<Integer> pq= new PriorityQueue<>();
+        //normally its a min heap peek pr min element hoge
+        for(int i=0;i<arr.length;i++){
+            pq.add(arr[i]);
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+
+        return pq.poll();  //kth element hi aayega
+
+
+    }
+}
