@@ -1,0 +1,40 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        int lenS = s.length();
+        int lenP = p.length();
+        
+        if(lenS<lenP) return result; 
+        
+           // count frequency of p
+          int[]countP= new int[26];
+          for (char c : p.toCharArray()) {
+             countP[c-'a']++;
+          }
+        
+        // substring of length lenP
+        for (int i =0; i<=lenS -lenP;i++) {
+            String sub = s.substring(i,i +lenP);
+            int[] countSb= new int[26];
+            
+            for (char c :sub.toCharArray()) {
+                countSb[c-'a']++;
+            }
+            
+            // compare krege 
+            boolean match =true;
+            for (int j=0; j<26; j++) {
+                if (countP[j] != countSb[j]) {
+                    match=false;
+                    break;
+                }
+            }
+            
+            if(match) {
+                result.add(i);
+            }
+        }
+        
+        return result;
+    }
+}
