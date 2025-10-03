@@ -1,0 +1,27 @@
+class Solution {
+    public int findMinArrowShots(int[][] arr) {
+        //sorting
+        Arrays.sort(arr,(a,b) -> Integer.compare(a[0],b[0]));
+
+        int arrow=1;  //atleast ek arrow toh hoga hi
+
+        int prevS=arr[0][0];
+        int prevE=arr[0][1];
+        for(int i=0;i<arr.length;i++){
+            int currS=arr[i][0];
+            int currE=arr[i][1];
+
+            if(currS>prevE){
+                arrow++;
+                prevS=currS;
+                 prevE=currE;
+
+            }
+            else{
+                prevS=Math.max(prevS,currS);
+                prevE=Math.min(prevE,currE);
+            }
+        }
+        return arrow;
+    }
+}
