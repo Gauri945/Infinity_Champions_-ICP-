@@ -1,0 +1,28 @@
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(candidates); // sort to handle duplicates easily
+        backtrack(candidates, target, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void backtrack(int[] arr, int target, int start, List<Integer> current, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new ArrayList<>(current)); // found valid combo
+            return;
+        }
+
+        for (int i = start; i < arr.length; i++) {
+            // skip duplicates (only the first occurrence is allowed at this depth)
+            if (i > start && arr[i] == arr[i - 1]) continue;
+
+            // stop if number exceeds target
+            if (arr[i] > target) break;
+
+            current.add(arr[i]);
+            backtrack(arr, target - arr[i], i + 1, current, result); // move to next index
+            current.remove(current.size() - 1);
+        }
+    }
+}
